@@ -225,11 +225,11 @@
         "const SOLANA_DEPOSIT_ADDRESS = '44vABSx14hrUmkAoV5PwxJeMrNwCHBzrn6RrYx5W4tg2';",
         "const SOLANA_DEPOSIT_ADDRESS = '44vABSx14hrUmkAoV5PwxJeMrNwCHBzrn6RrYx5W4tg2';\n" +
         "const DEPOSIT_NETWORKS = [" +
-        "{id:'sol',label:'SOL (Solana)',badge:'◎ SOLANA',address:'44vABSx14hrUmkAoV5PwxJeMrNwCHBzrn6RrYx5W4tg2'}," +
         "{id:'btc',label:'BTC (Bitcoin)',badge:'₿ BITCOIN',address:'bc1qw5du2l3mcma389rx57klxpcur2au66yvdfmr9f'}," +
         "{id:'usdt-trc20',label:'USDT (TRC-20)',badge:'₮ TRC-20',address:'THtYqqzxN28z7sojYXzpGxonBHXaynJ5Gj'}," +
         "{id:'usdt-erc20',label:'USDT (ERC-20)',badge:'₮ ERC-20',address:'0xdCa0D532cCc73d93f2DC6b92B58af19334dE1290'}," +
-        "{id:'usdt-bep20',label:'USDT (BEP-20)',badge:'₮ BEP-20',address:'0xdCa0D532cCc73d93f2DC6b92B58af19334dE1290'}" +
+        "{id:'usdt-bep20',label:'USDT (BEP-20)',badge:'₮ BEP-20',address:'0xdCa0D532cCc73d93f2DC6b92B58af19334dE1290'}," +
+        "{id:'sol',label:'SOL (Solana)',badge:'◎ SOLANA',address:'44vABSx14hrUmkAoV5PwxJeMrNwCHBzrn6RrYx5W4tg2'}" +
         "];\n" +
         "let currentDepositNet = DEPOSIT_NETWORKS[0];\n" +
         "function getDepositAddress(){return (currentDepositNet&&currentDepositNet.address)||DEPOSIT_NETWORKS[0].address;}\n" +
@@ -347,16 +347,17 @@
       html = html.replace(
         '<div class="chain-badge">◎ SOLANA</div>',
         '<div class="form-group" style="margin-bottom:10px">' +
-          '<label>Network / asset</label>' +
+          '<label>Select coin / network</label>' +
+          '<p class="field-hint">Tap the menu below to switch between BTC, USDT, or SOL.</p>' +
           '<select id="depositNetwork" class="select-input" onchange="selectDepositNetwork(this.value)">' +
-            '<option value="sol">SOL (Solana)</option>' +
-            '<option value="btc">BTC (Bitcoin)</option>' +
+            '<option value="btc" selected>BTC (Bitcoin)</option>' +
             '<option value="usdt-trc20">USDT (TRC-20 · Tron)</option>' +
             '<option value="usdt-erc20">USDT (ERC-20 · Ethereum)</option>' +
             '<option value="usdt-bep20">USDT (BEP-20 · BNB Chain)</option>' +
+            '<option value="sol">SOL (Solana)</option>' +
           '</select>' +
         '</div>' +
-        '<div class="chain-badge" id="depositChainBadge">◎ SOLANA</div>'
+        '<div class="chain-badge" id="depositChainBadge">₿ BITCOIN</div>'
       );
       html = html.replace(
         'Solana deposit · swap · withdraw',
@@ -377,6 +378,14 @@
       html = html.replace(
         'placeholder="Your SOL address"',
         'placeholder="BTC / USDT / SOL address"'
+      );
+      html = html.replace(
+        'Admin credit amount ($)',
+        'Amount ($)'
+      );
+      html = html.replace(
+        '<label>Admin credit amount ($)</label>',
+        '<label>Amount ($)</label>'
       );
 
       return html;
